@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sung Lamborghini Universe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --lambo-yellow: #ffd800;
+            --lambo-orange: #ff8c00;
+            --lambo-red: #e6002e;
+            --lambo-green: #007e3a;
+            --dark-bg: #0a0a0a;
+            --light-text: #f8f8f8;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            height: 50px;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--lambo-yellow);
+            transition: var(--transition);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.5) 50%, rgba(10,10,10,0.9) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--lambo-yellow), var(--lambo-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--lambo-yellow);
+            color: var(--dark-bg);
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            border: 2px solid var(--lambo-yellow);
+        }
+
+        .cta-btn:hover {
+            background: transparent;
+            color: var(--lambo-yellow);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 216, 0, 0.3);
+        }
+
+        .hero-car {
+            position: absolute;
+            right: 10%;
+            height: 70%;
+            z-index: 1;
+            filter: drop-shadow(0 0 20px rgba(255, 216, 0, 0.5));
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Models Section */
+        .models {
+            padding: 100px 10%;
+            background: url('https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/models-gate/models-s-text.jpg') center/cover;
+            position: relative;
+        }
+
+        .models::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.85);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--lambo-yellow);
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .model-card {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 216, 0, 0.1);
+        }
+
+        .model-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--lambo-yellow);
+        }
+
+        .model-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .model-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .model-card:hover .model-img img {
+            transform: scale(1.05);
+        }
+
+        .model-info {
+            padding: 20px;
+        }
+
+        .model-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--lambo-yellow);
+        }
+
+        .model-info p {
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .model-specs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .spec-item {
+            text-align: center;
+        }
+
+        .spec-item span {
+            display: block;
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        .spec-item strong {
+            font-size: 1.1rem;
+            color: var(--light-text);
+        }
+
+        .model-btn {
+            display: block;
+            text-align: center;
+            background: var(--lambo-yellow);
+            color: var(--dark-bg);
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .model-btn:hover {
+            background: var(--lambo-orange);
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 100px 10%;
+            text-align: center;
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            height: 200px;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(230, 0, 46, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: #111;
+            padding: 60px 10% 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            color: var(--lambo-yellow);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--lambo-yellow);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--lambo-yellow);
+            color: var(--dark-bg);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+        }
+
+        .footer-bottom p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Model Viewer Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 900px;
+            width: 90%;
+        }
+
+        .modal-img {
+            width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--lambo-yellow);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .hero-car {
+                height: 50%;
+                right: 5%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+            
+            .hero {
+                text-align: center;
+                justify-content: center;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+            }
+            
+            .hero-car {
+                display: none;
+            }
+            
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .models-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <img src="logo(1).png" alt="Lamborghini Logo" class="logo">
+        <nav>
+            <ul>
+                <li><a href="#models">Models</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#history">History</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Experience The Power Of Pure Performance</h1>
+            <p>Lamborghini represents the pinnacle of Italian luxury sports cars. With breathtaking design and heart-racing performance, our vehicles redefine the boundaries of automotive excellence.</p>
+            <a href="#models" class="cta-btn">Explore Models</a>
+        </div>
+        <img src="hura_evo_over_01.jpg" alt="Lamborghini Huracan" class="hero-car">
+    </section>
+
+    <!-- Models Section -->
+    <section class="models" id="models">
+        <div class="section-title">
+            <h2>Our Legendary Models</h2>
+            <p>Each Lamborghini is a masterpiece of engineering and design, created to deliver an unparalleled driving experience.</p>
+        </div>
+        <div class="models-grid">
+            <div class="model-card">
+                <div class="model-img">
+                    <img src="H-EVO_3.png" alt="Huracan EVO">
+                </div>
+                <div class="model-info">
+                    <h3>Huracán EVO</h3>
+                    <p>The Huracán EVO represents the natural evolution of the most successful V10 in Lamborghini history.</p>
+                    <div class="model-specs">
+                        <div class="spec-item">
+                            <strong>5.2L</strong>
+                            <span>Engine</span>
+                        </div>
+                        <div class="spec-item">
+                            <strong>640 HP</strong>
+                            <span>Power</span>
+                        </div>
+                        <div class="spec-item">
+                            <strong>3.1s</strong>
+                            <span>0-100 km/h</span>
+                        </div>
+                    </div>
+                    <a href="https://www.lamborghini.com/en-en/history/huracan-evo" class="model-btn" onclick="showModel('huracan')">View Details</a>
+                </div>
+            </div>
+            <div class="model-card">
+                <div class="model-img">
+                    <img src="ar_aventador_svj.png" alt="Aventador SVJ">
+                </div>
+                <div class="model-info">
+                    <h3>Aventador SVJ</h3>
+                    <p>The Aventador SVJ represents the purest essence of a super sports car and the absolute pinnacle of performance.</p>
+                    <div class="model-specs">
+                        <div class="spec-item">
+                            <strong>6.5L</strong>
+                            <span>Engine</span>
+                        </div>
+                        <div class="spec-item">
+                            <strong>770 HP</strong>
+                            <span>Power</span>
+                        </div>
+                        <div class="spec-item">
+                            <strong>2.8s</strong>
+                            <span>0-100 km/h</span>
+                        </div>
+                    </div>
+                    <a href="#" class="model-btn" onclick="showModel('aventador')">View Details</a>
+                </div>
+            </div>
+            <div class="model-card">
+                <div class="model-img">
+                    <img src="urus_s_ar.png" alt="Urus S">
+                </div>
+                <div class="model-info">
+                    <h3>Urus S</h3>
+                    <p>Lamborghini Urus is the world's first Super Sport Utility Vehicle, merging the soul of a super sports car with the functionality of an SUV.</p>
+                    <div class="model-specs">
+                        <div class="spec-item">
+                            <strong>4.0L</strong>
+                            <span>Engine</span>
+                        </div>
+                        <div class="spec-item">
+                            <strong>666 HP</strong>
+                            <span>Power</span>
+                        </div>
+                        <div class="spec-item">
+                            <strong>3.5s</strong>
+                            <span>0-100 km/h</span>
+                        </div>
+                    </div>
+                    <a href="#" class="model-btn" onclick="showModel('urus')">View Details</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="section-title">
+            <h2>Lamborghini Gallery</h2>
+            <p>Explore the stunning beauty and raw power of Lamborghini through our exclusive gallery.</p>
+        </div>
+        <div class="gallery-container">
+            <div class="gallery-item" onclick="openModal('https://www.lamborghini.com/en-en/history/huracan-evo')">
+                <img src="ar_aventador_svj.png" alt="Lamborghini 1">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openModal('https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/models/aventador/aventador-svj/gallery/gallery_m/Aventador-SVJ-Gallery-M-03.jpg')">
+                <img src="H-EVO_3.png" alt="Lamborghini 2">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openModal('https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/models/urus/urus_s/gallery/urus-s-gallery-03-m.jpg')">
+                <img src="urus_s_ar.png" alt="lam4k.jpeg">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openModal('https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/models/huracan/huracan-evo/gallery/Huracan-Evo-Gallery-04.jpg')">
+                <img src="hura_evo_over_01.jpg" alt="Lamborghini 4">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openModal('https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/models/aventador/aventador-svj/gallery/gallery_m/Aventador-SVJ-Gallery-M-02.jpg')">
+                <img src="temerario.jpg" alt="Lamborghini 5">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openModal('https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/models/urus/urus_s/gallery/urus-s-gallery-02-m.jpg')">
+                <img src="revuelto.jpg" alt="Lamborghini 6">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>Lamborghini</h3>
+                <p>Lamborghini S.p.A. is an Italian brand and manufacturer of luxury sports cars and SUVs based in Sant'Agata Bolognese.</p>
+                <div class="social-links">
+                    <a href="https://whatsapp.com/channel/0029VajdUjO7tkj0v3rZHw3q"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://x.com/sung_tech"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/lamborghini/?hl=en"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/channel/UC9DXZC8BCDOW6pYAQKgozqw"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Models</h3>
+                <ul>
+                    <li><a href="#">Huracán</a></li>
+                    <li><a href="#">Aventador</a></li>
+                    <li><a href="#">Urus</a></li>
+                    <li><a href="#">Limited Series</a></li>
+                    <li><a href="#">Concept Models</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                    <li><a href="#">Media Center</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">Dealerships</a></li>
+                    <li><a href="#">Test Drive</a></li>
+                    <li><a href="#">Customer Service</a></li>
+                    <li><a href="#">+2349159180375</a></li>
+                    <li><a href="#">info@sungtech675@gmail.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Sung Mobile🤞 All rights reserved. | Designed with passion for super sports cars</p>
+        </div>
+    </footer>
+
+    <!-- Model Viewer Modal -->
+    <div class="modal" id="modelModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <img src="" alt="Lamborghini Model" class="modal-img" id="modalImage">
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Model details function
+        function showModel(model) {
+            event.preventDefault();
+            let title, description, specs;
+            
+            switch(model) {
+                case 'huracan':
+                    title = "Huracán EVO";
+                    description = "The Huracán EVO represents the natural evolution of the most successful V10 in Lamborghini history. It combines the technologies from the Huracán Performante with aerodynamic refinements and a new vehicle dynamic control system.";
+                    specs = {
+                        engine: "5.2L V10",
+                        power: "640 HP @ 8,000 rpm",
+                        torque: "600 Nm @ 6,500 rpm",
+                        acceleration: "0-100 km/h in 2.9s",
+                        topspeed: "325 km/h"
+                    };
+                    break;
+                case 'aventador':
+                    title = "Aventador SVJ";
+                    description = "The Aventador SVJ takes the concept of the super sports car to a whole new level. With the introduction of Lamborghini Dinamica Veicolo Attiva 2.0 (LDVA 2.0), the Aventador SVJ represents the convergence of cutting-edge technologies.";
+                    specs = {
+                        engine: "6.5L V12",
+                        power: "770 HP @ 8,500 rpm",
+                        torque: "720 Nm @ 6,750 rpm",
+                        acceleration: "0-100 km/h in 2.8s",
+                        topspeed: "350 km/h"
+                    };
+                    break;
+                case 'urus':
+                    title = "Urus S";
+                    description = "The Lamborghini Urus is the world's first Super Sport Utility Vehicle. It combines the soul of a super sports car with the functionality of an SUV. Powered by a 4.0-liter twin-turbo V8 engine, the Urus accelerates from 0 to 100 km/h in 3.6 seconds.";
+                    specs = {
+                        engine: "4.0L Twin-Turbo V8",
+                        power: "666 HP @ 6,000 rpm",
+                        torque: "850 Nm @ 2,250 rpm",
+                        acceleration: "0-100 km/h in 3.5s",
+                        topspeed: "305 km/h"
+                    };
+                    break;
+            }
+            
+            alert(`${title}\n\n${description}\n\nSpecifications:\nEngine: ${specs.engine}\nPower: ${specs.power}\nTorque: ${specs.torque}\nAcceleration: ${specs.acceleration}\nTop Speed: ${specs.topspeed}`);
+        }
+
+        // Gallery modal functions
+        function openModal(imgSrc) {
+            const modal = document.getElementById('modelModal');
+            const modalImg = document.getElementById('modalImage');
+            modalImg.src = imgSrc;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modelModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside the image
+        window.onclick = function(event) {
+            const modal = document.getElementById('modelModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Animate elements when scrolling
+        window.addEventListener('scroll', revealOnScroll);
+
+        function revealOnScroll() {
+            const elements = document.querySelectorAll('.model-card, .gallery-item, .section-title');
+            const windowHeight = window.innerHeight;
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementPosition < windowHeight - elementVisible) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Initialize elements with hidden state
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.model-card, .gallery-item, .section-title');
+            elements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = `opacity 0.5s ease, transform 0.5s ease ${index * 0.1}s`;
+            });
+            
+            // Trigger the animation after a short delay
+            setTimeout(revealOnScroll, 100);
+        });
+    </script>
+</body>
+</html>
